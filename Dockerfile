@@ -1,16 +1,13 @@
+# use the centos php image, originally used in source-to-image (s2i)
 FROM centos/php-70-centos7
 
 # This image provides an Apache+PHP environment for running PHP
 # applications.
 
+# Apache will listen on port 8080
 EXPOSE 8080
-EXPOSE 8443
 
-# Description
-# This image provides an Apache 2.4 + PHP 7.0 environment for running PHP applications.
-# Exposed ports:
-# * 8080 - alternative port for http
-
+# set environment variables for apache configuration at runtime
 ENV PHP_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/php/ \
     APP_DATA=${APP_ROOT}/src \
     PHP_DEFAULT_INCLUDE_PATH=/opt/rh/rh-php70/root/usr/share/pear \
@@ -25,9 +22,11 @@ ENV PHP_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/php/ \
     HTTPD_VAR_PATH=/opt/rh/httpd24/root/var \
     SCL_ENABLED=rh-php70
 
+# include our application in the image
 COPY index.php /opt/app-root/src/
 
+# drop root privileges when running
 USER 1001
 
-# Set the default CMD to print the usage of the language image
+# call the startup script of the parent image
 CMD sh /usr/libexec/s2i/run
