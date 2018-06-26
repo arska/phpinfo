@@ -2,6 +2,30 @@
 
 This is a very simple PHP application showing information about the PHP environment. I use it to show the speed and simpleness of an http://appuio.ch source to image process
 
+* Web-GUI: "Add to project" -> search for "PHP" -> Choose "PHP" -> Next -> Version: 7.0, Name: phpinfo, Git Repository: https://github.com/arska/phpinfo.git -> Create -> Close
+
+* CLI using source-to-image (s2i):
+```
+oc new-app php:7.0~https://github.com/arska/phpinfo.git
+oc expose service phpinfo
+```
+* CLI using Dockerfile:
+```
+oc new-app --strategy=docker https://github.com/arska/phpinfo.git
+oc expose service phpinfo
+```
+You can clean up the application with:
+```
+oc delete all -l app=phpinfo
+```
+
+You can also build/run the application locally using docker:
+```
+docker build -t phpinfo .
+docker run -p 8080:8080 phpinfo
+```
+The application is then accessible at http://127.0.0.1:8080/
+
 ## Demo walkthrough
 
 ### prepare
