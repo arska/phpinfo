@@ -14,6 +14,11 @@ oc expose service phpinfo
 oc new-app --strategy=docker https://github.com/arska/phpinfo.git
 oc expose service phpinfo
 ```
+* CLI using OpenShift Template:
+```
+oc new-app -f https://raw.githubusercontent.com/arska/phpinfo/master/template.yaml -p NAME=phpinfo
+```
+
 You can clean up the application with:
 ```
 oc delete all -l app=phpinfo
