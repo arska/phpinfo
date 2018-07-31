@@ -1,4 +1,4 @@
-# PHP Sample Application
+# PHP Sample Application 
 
 This is a very simple PHP application showing information about the PHP environment. I use it to show the speed and simpleness of an http://appuio.ch source to image process
 
